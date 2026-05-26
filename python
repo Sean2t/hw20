@@ -1,0 +1,25 @@
+import networkx as nx
+import time
+
+G = nx.read_edgelist(
+    "facebook_combined.txt",
+    nodetype=int
+)
+
+start = 0
+
+t1 = time.perf_counter()
+list(nx.bfs_tree(G,start))
+bfs_time = time.perf_counter()-t1
+
+t2 = time.perf_counter()
+list(nx.dfs_tree(G,start))
+dfs_time = time.perf_counter()-t2
+
+print("Nodes=",G.number_of_nodes())
+print("Edges=",G.number_of_edges())
+print("Average Degree=",
+      2*G.number_of_edges()/G.number_of_nodes())
+
+print("BFS=",bfs_time)
+print("DFS=",dfs_time)
